@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.activity.CheckUserActivity">
+
+
+    <TextView
+            android:id="@+id/passwd_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="@string/please_input_passwd"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toTopOf="@id/passwd"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+            android:id="@+id/pass_hint"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:gravity="center"
+            android:text="@string/passwd"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@id/passwd"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/passwd" />
+
+    <EditText
+            android:id="@+id/passwd"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:ems="10"
+            android:inputType="numberPassword"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@id/pass_hint"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.45" />
+
+    <TextView
+            android:id="@+id/confirm_passwd_hint"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:gravity="center"
+            android:text="@string/confirm_passwd"
+            android:textSize="18sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/confirm_passwd"
+            app:layout_constraintEnd_toStartOf="@id/confirm_passwd"
+            app:layout_constraintStart_toStartOf="@id/pass_hint"
+            app:layout_constraintTop_toTopOf="@id/confirm_passwd" />
+
+    <EditText
+            android:id="@+id/confirm_passwd"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:ems="10"
+            android:inputType="numberPassword"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@id/passwd"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/passwd"
+            app:layout_constraintTop_toBottomOf="@id/passwd" />
+
+    <TextView
+            android:id="@+id/confirm"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/shape_corners_4dp_c1890ff"
+            android:gravity="center"
+            android:text="@string/confirm"
+            android:textColor="@color/cffffff"
+            android:textSize="18sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/confirm_passwd" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

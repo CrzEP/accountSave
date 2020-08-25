@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">accountSave</string>
+    <string name="please_input_passwd">请输入密码</string>
+    <string name="passwd">密码：</string>
+    <string name="confirm_passwd">确认密码：</string>
+    <string name="confirm">确认</string>
+    <string name="passwd_must_match">两次密码必须一致！</string>
+    <string name="account_item">账户详情</string>
+    <string name="account_name">账户名：</string>
+    <string name="account_id">账户id:</string>
+    <string name="account_passwd">账户密码：</string>
+    <string name="account_phone">手机：</string>
+    <string name="email">邮箱：</string>
+    <string name="please_enter_description">在这输入描述</string>
+    <string name="confirm_update">确认并修改</string>
+</resources>
