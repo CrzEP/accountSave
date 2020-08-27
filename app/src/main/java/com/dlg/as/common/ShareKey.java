@@ -13,6 +13,9 @@ public class ShareKey {
     // 账户密码
     public static final String ACCOUNT_PASSWD="account_passwd";
 
+    // APP锁
+    public static final String ACCOUT_APP_IN_PASSWD_USE_KEY="account_app_in_passwd";
+
     // 所有储存账户储存的账户key
     public static final String ACCOUNT_ALL_ACCOUNT_LIST="accout_all_account_list";
 

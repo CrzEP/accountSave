@@ -13,4 +13,21 @@
     <string name="email">邮箱：</string>
     <string name="please_enter_description">在这输入描述</string>
     <string name="confirm_update">确认并修改</string>
+    <string name="no_account_found">没有找到任何账户，添加一个吧</string>
+    <string name="input_passwd_hint">输入密码</string>
+    <string name="app_lock">APP锁</string>
+    <string name="start_on">开启</string>
+    <string name="start_off">关闭</string>
+    <string name="update_passwd">修改密码</string>
+    <string name="setting">设置</string>
+    <string name="source_code">项目源码</string>
+    <string name="source_code_web_side">https://github.com/CrzEP/accountSave</string>
+    <string name="error_passwd">错误的密码</string>
+    <string name="update_success">修改成功！</string>
+    <string name="update_fail">修改失败!</string>
+    <string name="account_list">账户列表</string>
+    <string name="desp">描述:</string>
+    <string name="message">信息</string>
+    <string name="cancle">取消</string>
+    <string name="confirm_delete_account">确认删除账户？</string>
 </resources>

@@ -8,11 +8,11 @@ import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.dlg.as.R;
-import com.dlg.as.common.ShareKey;
+import com.dlg.as.base.BaseActivity;
 import com.dlg.as.util.ARouterUtil;
 import com.dlg.as.util.AccountCurd;
-import com.dlg.as.util.SharedPreferencesUtil;
 import com.githang.statusbar.StatusBarCompat;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 @Route(path = ARouterUtil.ACCOUNT_ITEM_ACTIVITY)
-public class AccountItemActivity extends AppCompatActivity {
+public class AccountItemActivity extends BaseActivity {
 
     @BindView(R.id.account_name_content)
     EditText accountName;
@@ -37,8 +37,23 @@ public class AccountItemActivity extends AppCompatActivity {
     @BindView(R.id.describe)
     EditText describe;
 
-    @Autowired(name = "key")
-    ArrayList<String> account;
+    @Autowired(name = "id")
+    String id;
+    @Autowired(name = "name")
+    String name;
+    @Autowired(name = "accountId")
+    String acId;
+    @Autowired(name = "passwd")
+    String passwd;
+    @Autowired(name = "phone")
+    String phone;
+    @Autowired(name = "email")
+    String email;
+    @Autowired(name = "desc")
+    String desc;
+
+
+    private String TAG=AccountItemActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,37 +62,45 @@ public class AccountItemActivity extends AppCompatActivity {
         //设置状态栏颜色
         StatusBarCompat.setStatusBarColor(this,
                 getResources().getColor(R.color.cffffff));
+        ARouter.getInstance().inject(this);
         ButterKnife.bind(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         initView();
     }
 
     // 初始化视图
     private void initView() {
-        if (account!=null){
-            accountName.setText(account.get(1));
-            accountId.setText(account.get(2));
-            accountPasswd.setText(account.get(3));
-            accountPhone.setText(account.get(4));
-            accountEmail.setText(account.get(5));
-            describe.setText(account.get(6));
+        if (id!=null){
+            accountName.setText(name);
+            accountId.setText(acId);
+            accountPasswd.setText(passwd);
+            accountPhone.setText(phone);
+            accountEmail.setText(email);
+            describe.setText(desc);
         }
     }
 
     @OnClick(R.id.confirm_update)
     public void confirmUpdate(){
         // 如果account等于空则表示新建 否则更新
-        if (account==null){
-            account=new ArrayList<>();
-            account.add(0,AccountCurd.getId());
+        ArrayList<String> list=new ArrayList<String>();
+        if (id==null || id.trim().length()==0){
+            list.add(0,AccountCurd.getId());
+        }else{
+            list.add(0,id);
         }
-        account.add(1,accountName.getText().toString());
-        account.add(3,accountId.getText().toString());
-        account.add(4,accountPasswd.getText().toString());
-        account.add(5,accountPhone.getText().toString());
-        account.add(6,accountEmail.getText().toString());
-        account.add(7,describe.getText().toString());
+        list.add(1,accountName.getText().toString());
+        list.add(2,accountId.getText().toString());
+        list.add(3,accountPasswd.getText().toString());
+        list.add(4,accountPhone.getText().toString());
+        list.add(5,accountEmail.getText().toString());
+        list.add(6,describe.getText().toString());
         //添加到Share文件中
-        boolean ifSuccess=AccountCurd.addAccount(account.get(0),account);
+        boolean ifSuccess=AccountCurd.addUpdateAccount(list);
         if (ifSuccess){
             Toast.makeText(this,"保存/修改成功！",Toast.LENGTH_SHORT).show();
         }else{
@@ -85,9 +108,14 @@ public class AccountItemActivity extends AppCompatActivity {
         }
     }
 
-
     @OnClick(R.id.back)
     public void backOnclick(){
+        onBackPressed();
+    }
+
+    @Override
+    public void onBackPressed() {
         super.onBackPressed();
+        finish();
     }
 }

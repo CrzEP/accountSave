@@ -1,26 +1,31 @@
 package com.dlg.as.ui.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.dlg.as.R;
 import com.dlg.as.base.BaseActivity;
 import com.dlg.as.common.ShareKey;
 import com.dlg.as.ui.adapter.CardAdapter;
+import com.dlg.as.ui.widget.HintDialog;
 import com.dlg.as.util.ARouterUtil;
+import com.dlg.as.util.AccountCurd;
 import com.dlg.as.util.SharedPreferencesUtil;
 import com.githang.statusbar.StatusBarCompat;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -28,10 +33,26 @@ import butterknife.OnClick;
 @Route(path = ARouterUtil.MAIN_ACTIVITY)
 public class MainActivity extends BaseActivity {
 
+    @BindView(R.id.top_bar)
+    ConstraintLayout topBar;
     @BindView(R.id.recycler)
     RecyclerView recycler;
+    @BindString(R.string.update_success)
+    String updateSuccess;
+    @BindString(R.string.update_fail)
+    String updateFail;
+    @BindString(R.string.confirm_delete_account)
+    String confirmDeleteAccount;
+    @BindString(R.string.cancle)
+    String cancle;
+    @BindString(R.string.confirm)
+    String confirm;
     private CardAdapter cardAdapter;
     private List<ArrayList<String>> accounts=new ArrayList<>();
+
+    private String TAG=MainActivity.class.getSimpleName();
+
+    private HintDialog hintDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +62,11 @@ public class MainActivity extends BaseActivity {
         StatusBarCompat.setStatusBarColor(this,
                 getResources().getColor(R.color.cffffff));
         ButterKnife.bind(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         initData();
         initView();
     }
@@ -48,19 +74,57 @@ public class MainActivity extends BaseActivity {
     // 初始化视图
     private void initView() {
         cardAdapter=new CardAdapter(R.layout.account_item_card_layout,accounts);
-        cardAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                ArrayList<String> item=cardAdapter.getItem(position);
-                if (null!=item) {
+        cardAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+            ArrayList<String> item=cardAdapter.getItem(position);
+            if (item!=null){
+                if (view.getId()==R.id.delete){
+                    // 删除点击侦听
+                    deleteAccount(item);
+                }else if(view.getId()==R.id.item_const){
+                    // 详情点击侦听
                     jumpToItemActivity(item);
                 }
             }
         });
+        // 布局模型
         LinearLayoutManager linear=new LinearLayoutManager(this,
                 LinearLayoutManager.VERTICAL,false);
         recycler.setLayoutManager(linear);
         recycler.setAdapter(cardAdapter);
+        // 判断有误数据
+        if (accounts.size()>0){
+            recycler.setVisibility(View.VISIBLE);
+        }else{
+            recycler.setVisibility(View.GONE);
+        }
+
+
+    }
+
+    /**
+     * 删除账户
+     * @param item 账户
+     */
+    private void deleteAccount(ArrayList<String> item) {
+        View.OnClickListener leftListener= v ->{
+            Toast.makeText(getBaseContext(), updateFail, Toast.LENGTH_SHORT).show();
+        };
+        View.OnClickListener rightListener=v-> {
+            if (AccountCurd.deleteAccount(item)) {
+                Toast.makeText(getBaseContext(), updateSuccess, Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getBaseContext(), updateFail, Toast.LENGTH_SHORT).show();
+            }
+        };
+        //创建弹出框
+        hintDialog=new HintDialog.Builder(this)
+                .setHint(confirmDeleteAccount)
+                .setLeftTv(cancle,
+                        leftListener)
+                .setRightTv(confirm,
+                        rightListener)
+                .create();
+        hintDialog.show();
     }
 
     /**
@@ -70,13 +134,20 @@ public class MainActivity extends BaseActivity {
     private void jumpToItemActivity(@NonNull ArrayList<String> item) {
         ARouter.getInstance()
                 .build(ARouterUtil.ACCOUNT_ITEM_ACTIVITY)
-                .withStringArrayList("key",item)
+                .withString("id",item.get(0))
+                .withString("name",item.get(1))
+                .withString("accountId",item.get(2))
+                .withString("passwd",item.get(3))
+                .withString("phone",item.get(4))
+                .withString("email",item.get(5))
+                .withString("desc",item.get(6))
                 .navigation();
     }
 
     // 初始化数据
     private void initData() {
         List<String> accountKeys = SharedPreferencesUtil.getListData(ShareKey.ACCOUNT_ALL_ACCOUNT_LIST, String.class);
+        accounts=new ArrayList<>();
         for (String key: accountKeys){
             ArrayList<String> list= (ArrayList<String>) SharedPreferencesUtil.getListData(key,String.class);
             if (list!=null){
@@ -99,7 +170,7 @@ public class MainActivity extends BaseActivity {
     @OnClick(R.id.setting)
     public void settingOnClick(){
         ARouter.getInstance()
-                .build(ARouterUtil.MAIN_ACTIVITY)
+                .build(ARouterUtil.SETTING_ACTIVITY)
                 .navigation();
     }
 }

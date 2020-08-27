@@ -27,7 +27,9 @@ public class CardAdapter extends BaseQuickAdapter<ArrayList<String>, BaseViewHol
 
     @Override
     protected void convert(BaseViewHolder helper, ArrayList<String> item) {
-        helper.setText(R.id.title,item.get(0))
-                .setText(R.id.introduce,item.get(1));
+        helper.setText(R.id.title,item.get(1))
+                .setText(R.id.introduce,item.get(6))
+                .addOnClickListener(R.id.item_const)
+                .addOnClickListener(R.id.delete);
     }
 }

@@ -12,19 +12,50 @@ import java.util.ArrayList;
  **/
 public class AccountCurd {
 
-    public static boolean addAccount(String accountName, ArrayList<String> accountList){
+    /**
+     * 增加、修改账户信息
+     * @param accountList 账户列表
+     * @return true 成功 false 失败
+     */
+    public static boolean addUpdateAccount(ArrayList<String> accountList){// 保存账户信息
+        boolean listKey=SharedPreferencesUtil.putListData(accountList.get(0),accountList);
+        if (!listKey){
+            return false;
+        }
         // 先获取原来的key集合
         ArrayList<String> list= (ArrayList<String>) SharedPreferencesUtil
                         .getListData(ShareKey.ACCOUNT_ALL_ACCOUNT_LIST,String.class);
-        // 添加
-        list.add(accountName);
-        // 保存key
-        boolean bKey=SharedPreferencesUtil.putListData(ShareKey.ACCOUNT_ALL_ACCOUNT_LIST,list);
-        if (!bKey){
+        if (!list.contains(accountList.get(0))){
+            // 添加
+            list.add(accountList.get(0));
+        }
+        return SharedPreferencesUtil.putListData(ShareKey.ACCOUNT_ALL_ACCOUNT_LIST,list);
+    }
+
+    /**
+     * 删除账户信息
+     * @param accountList 账户列表
+     * @return true 成功 false 失败
+     */
+    public static boolean deleteAccount(ArrayList<String> accountList){
+        // 先获取原来的key集合
+        ArrayList<String> list= (ArrayList<String>) SharedPreferencesUtil
+                .getListData(ShareKey.ACCOUNT_ALL_ACCOUNT_LIST,String.class);
+        // 删除
+        boolean bo1=list.remove(accountList.get(0));
+        boolean bo2=SharedPreferencesUtil.putListData(ShareKey.ACCOUNT_ALL_ACCOUNT_LIST,list);
+        // 全真才为真
+        if (!(bo1 && bo2)){
             return false;
         }
-        // 保存账户信息
-        return SharedPreferencesUtil.putListData(accountName,accountList);
+        boolean shareKey= SharedPreferencesUtil.deleteData(accountList.get(0));
+        if (shareKey){
+            return true;
+        }
+        // 重新添加
+        list.add(accountList.get(0));
+        SharedPreferencesUtil.putListData(ShareKey.ACCOUNT_ALL_ACCOUNT_LIST,list);
+        return false;
     }
 
     // 获取一个id

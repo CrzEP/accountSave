@@ -19,7 +19,7 @@
                 android:id="@+id/back"
                 android:layout_width="48dp"
                 android:layout_height="0dp"
-                android:padding="10dp"
+                android:padding="12dp"
                 android:src="@drawable/icon_left"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -58,13 +58,13 @@
                 <TextView
                         android:id="@+id/account_name"
                         android:layout_width="0dp"
-                        android:layout_height="32dp"
+                        android:layout_height="24dp"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="16dp"
                         android:gravity="left|center_vertical"
                         android:text="@string/account_name"
-                        android:textSize="18dp"
+                        android:textSize="14sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
@@ -78,7 +78,7 @@
                         android:layout_marginEnd="16dp"
                         android:background="@color/cffffff"
                         android:gravity="center"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/account_name" />
@@ -86,13 +86,13 @@
                 <TextView
                         android:id="@+id/account_id"
                         android:layout_width="0dp"
-                        android:layout_height="32dp"
+                        android:layout_height="24dp"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="16dp"
                         android:gravity="left|center_vertical"
                         android:text="@string/account_id"
-                        android:textSize="18dp"
+                        android:textSize="14sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/account_name_content" />
@@ -105,7 +105,7 @@
                         android:layout_marginEnd="16dp"
                         android:background="@color/cffffff"
                         android:gravity="center"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/account_id" />
@@ -113,13 +113,13 @@
                 <TextView
                         android:id="@+id/account_passwd"
                         android:layout_width="0dp"
-                        android:layout_height="32dp"
+                        android:layout_height="24dp"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="16dp"
                         android:gravity="left|center_vertical"
                         android:text="@string/account_passwd"
-                        android:textSize="18dp"
+                        android:textSize="14sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/account_id_content" />
@@ -132,7 +132,7 @@
                         android:layout_marginEnd="16dp"
                         android:background="@color/cffffff"
                         android:gravity="center"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/account_passwd" />
@@ -140,13 +140,13 @@
                 <TextView
                         android:id="@+id/account_phone"
                         android:layout_width="0dp"
-                        android:layout_height="32dp"
+                        android:layout_height="24dp"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="16dp"
                         android:gravity="left|center_vertical"
                         android:text="@string/account_phone"
-                        android:textSize="18dp"
+                        android:textSize="14sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/account_passwd_content" />
@@ -160,7 +160,7 @@
                         android:background="@color/cffffff"
                         android:gravity="center"
                         android:inputType="number"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/account_phone" />
@@ -168,13 +168,13 @@
                 <TextView
                         android:id="@+id/account_email"
                         android:layout_width="0dp"
-                        android:layout_height="32dp"
+                        android:layout_height="24dp"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="16dp"
                         android:gravity="left|center_vertical"
                         android:text="@string/email"
-                        android:textSize="18dp"
+                        android:textSize="14sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/account_phone_content" />
@@ -188,7 +188,7 @@
                         android:background="@color/cffffff"
                         android:gravity="center"
                         android:inputType="textEmailAddress"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/account_email" />
@@ -198,7 +198,6 @@
                         android:layout_width="0dp"
                         android:layout_height="120dp"
                         android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
                         android:layout_marginEnd="16dp"
                         android:autofillHints=""
                         android:background="@color/cffffff"
@@ -212,7 +211,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/account_email_content"
+                        app:layout_constraintTop_toBottomOf="@+id/desp"
                         tools:targetApi="o" />
 
                 <TextView
@@ -231,6 +230,18 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/describe"></TextView>
+
+                <TextView
+                        android:id="@+id/desp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:text="@string/desp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/account_email_content" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

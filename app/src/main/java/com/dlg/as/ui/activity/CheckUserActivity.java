@@ -111,16 +111,13 @@ public class CheckUserActivity extends BaseActivity {
                 pass2=s.toString();
             }
         });
-        confirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (pass1.length()>0&&pass2.length()>0&&pass1.equals(pass2)){
-                    ARouter.getInstance()
-                            .build(ARouterUtil.MAIN_ACTIVITY)
-                            .navigation();
-                }else{
-                    Toast.makeText(getBaseContext(),passwdMustMatch,Toast.LENGTH_SHORT).show();
-                }
+        confirm.setOnClickListener(v -> {
+            if (pass1.length()>0&&pass2.length()>0&&pass1.equals(pass2)){
+                ARouter.getInstance()
+                        .build(ARouterUtil.MAIN_ACTIVITY)
+                        .navigation();
+            }else{
+                Toast.makeText(getBaseContext(),passwdMustMatch,Toast.LENGTH_SHORT).show();
             }
         });
     }

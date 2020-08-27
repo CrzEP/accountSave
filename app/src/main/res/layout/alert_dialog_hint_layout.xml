@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_corners_8dp_cffffff">
+
+    <TextView
+            android:id="@+id/alert_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/message"
+            android:textColor="@color/c333333"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+            android:id="@+id/hint"
+            android:layout_width="208dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:paddingStart="8dp"
+            android:paddingTop="1dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="1dp"
+            android:text=""
+            android:textColor="@color/c666666"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/alert_title" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/hint">
+
+        <TextView
+                android:id="@+id/tv_left"
+                android:layout_width="120dp"
+                android:layout_height="48dp"
+                android:gravity="center"
+                android:text="@string/cancle"
+                android:textColor="@color/ccccccc"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/driver_v"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+                android:id="@+id/tv_right"
+                android:layout_width="120dp"
+                android:layout_height="48dp"
+                android:gravity="center"
+                android:text="@string/confirm"
+                android:textColor="@color/c1890ff"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/driver_v"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+                android:id="@+id/driver"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@color/cfafafa" />
+
+        <ImageView
+                android:id="@+id/driver_v"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/tv_right"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tv_left"
+                app:layout_constraintTop_toBottomOf="@+id/driver"
+                app:srcCompat="@color/cfafafa" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
