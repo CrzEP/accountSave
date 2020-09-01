@@ -103,6 +103,7 @@ public class AccountItemActivity extends BaseActivity {
         boolean ifSuccess=AccountCurd.addUpdateAccount(list);
         if (ifSuccess){
             Toast.makeText(this,"保存/修改成功！",Toast.LENGTH_SHORT).show();
+            onBackPressed();
         }else{
             Toast.makeText(this,"保存/修改失败！",Toast.LENGTH_SHORT).show();
         }

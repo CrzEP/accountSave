@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -33,6 +34,8 @@ public class SettingActivity extends BaseActivity {
     EditText passwdConfirm;
     @BindView(R.id.app_lock_switch)
     Switch appLockSwitch;
+    @BindView(R.id.switch_hint)
+    TextView switchHint;
 
     @BindString(R.string.error_passwd)
     String errorPasswd;
@@ -40,6 +43,10 @@ public class SettingActivity extends BaseActivity {
     String updateSuccess;
     @BindString(R.string.update_fail)
     String updateFail;
+    @BindString(R.string.start_off)
+    String startOff;
+    @BindString(R.string.start_on)
+    String startOn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,16 +56,13 @@ public class SettingActivity extends BaseActivity {
         StatusBarCompat.setStatusBarColor(this,
                 getResources().getColor(R.color.cffffff));
         ButterKnife.bind(this);
-        appLockSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (SharedPreferencesUtil.putData(ShareKey.ACCOUT_APP_IN_PASSWD_USE_KEY,
-                        isChecked)){
-                    Toast.makeText(getBaseContext(),updateSuccess,Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(getBaseContext(),updateFail,Toast.LENGTH_SHORT).show();
-                }
-            }
+        boolean appLockState= (boolean) SharedPreferencesUtil.getData(ShareKey.ACCOUT_APP_IN_PASSWD_USE_KEY,Boolean.TRUE);
+        switchHint.setText(appLockState?startOn:startOff);
+        appLockSwitch.setChecked(appLockState);
+        appLockSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            switchHint.setText(isChecked?startOn:startOff);
+            SharedPreferencesUtil.putData(ShareKey.ACCOUT_APP_IN_PASSWD_USE_KEY,
+                    isChecked);
         });
     }
 

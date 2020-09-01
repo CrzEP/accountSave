@@ -27,7 +27,7 @@
     <string name="update_fail">修改失败!</string>
     <string name="account_list">账户列表</string>
     <string name="desp">描述:</string>
-    <string name="message">信息</string>
+    <string name="message">提示信息</string>
     <string name="cancle">取消</string>
-    <string name="confirm_delete_account">确认删除账户？</string>
+    <string name="confirm_delete_account">确认删除"%s"账户？</string>
 </resources>

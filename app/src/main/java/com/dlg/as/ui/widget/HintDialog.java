@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 
 import com.dlg.as.R;
 
-
 /**
  * author:Crzep
  * create time:2020/3/12
@@ -22,8 +21,6 @@ public class HintDialog extends Dialog {
     private HintDialog(@NonNull Context context, int themeResId) {
         super(context, themeResId);
     }
-
-
 
     public static class Builder{
 
@@ -36,6 +33,7 @@ public class HintDialog extends Dialog {
 
         public Builder(Context context){
             hintDialog=new HintDialog(context, R.style.NoticeDialogStyle);
+            hintDialog.setCanceledOnTouchOutside(true);
             LayoutInflater inflater=
                     (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             //加载布局文件

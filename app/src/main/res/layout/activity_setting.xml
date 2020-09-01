@@ -114,12 +114,10 @@
 
             <Switch
                     android:id="@+id/app_lock_switch"
-                    android:layout_width="48dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_marginEnd="16dp"
                     android:checked="true"
-                    android:textOff="@string/start_off"
-                    android:textOn="@string/start_on"
                     app:layout_constraintBottom_toTopOf="@+id/divider"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -132,6 +130,15 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:srcCompat="@color/divider" />
+
+            <TextView
+                    android:id="@+id/switch_hint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    app:layout_constraintBottom_toTopOf="@+id/divider"
+                    app:layout_constraintEnd_toStartOf="@+id/app_lock_switch"
+                    app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

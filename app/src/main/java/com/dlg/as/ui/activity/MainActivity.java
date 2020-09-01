@@ -3,6 +3,7 @@ package com.dlg.as.ui.activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -35,6 +36,8 @@ public class MainActivity extends BaseActivity {
 
     @BindView(R.id.top_bar)
     ConstraintLayout topBar;
+    @BindView(R.id.null_hint)
+    TextView nullHint;
     @BindView(R.id.recycler)
     RecyclerView recycler;
     @BindString(R.string.update_success)
@@ -67,7 +70,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        initData();
+        getAccountData();
         initView();
     }
 
@@ -91,14 +94,29 @@ public class MainActivity extends BaseActivity {
                 LinearLayoutManager.VERTICAL,false);
         recycler.setLayoutManager(linear);
         recycler.setAdapter(cardAdapter);
-        // 判断有误数据
+        emptyDataView();
+    }
+
+    /**
+     * 刷新数据
+     */
+    private void refreshData(){
+        cardAdapter.setNewData(getAccountData());
+        cardAdapter.notifyDataSetChanged();
+        emptyDataView();
+    }
+
+    /**
+     * 判断有无数据，更换显示视图
+     */
+    private void emptyDataView(){
         if (accounts.size()>0){
             recycler.setVisibility(View.VISIBLE);
+            nullHint.setVisibility(View.GONE);
         }else{
             recycler.setVisibility(View.GONE);
+            nullHint.setVisibility(View.VISIBLE);
         }
-
-
     }
 
     /**
@@ -111,6 +129,7 @@ public class MainActivity extends BaseActivity {
         };
         View.OnClickListener rightListener=v-> {
             if (AccountCurd.deleteAccount(item)) {
+                refreshData();
                 Toast.makeText(getBaseContext(), updateSuccess, Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getBaseContext(), updateFail, Toast.LENGTH_SHORT).show();
@@ -118,7 +137,7 @@ public class MainActivity extends BaseActivity {
         };
         //创建弹出框
         hintDialog=new HintDialog.Builder(this)
-                .setHint(confirmDeleteAccount)
+                .setHint(String.format(confirmDeleteAccount,item.get(1)))
                 .setLeftTv(cancle,
                         leftListener)
                 .setRightTv(confirm,
@@ -145,7 +164,7 @@ public class MainActivity extends BaseActivity {
     }
 
     // 初始化数据
-    private void initData() {
+    private List<ArrayList<String>> getAccountData() {
         List<String> accountKeys = SharedPreferencesUtil.getListData(ShareKey.ACCOUNT_ALL_ACCOUNT_LIST, String.class);
         accounts=new ArrayList<>();
         for (String key: accountKeys){
@@ -154,6 +173,7 @@ public class MainActivity extends BaseActivity {
                 accounts.add(list);
             }
         }
+        return accounts;
     }
 
     @OnClick(R.id.add_new)

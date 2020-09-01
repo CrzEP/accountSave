@@ -43,6 +43,10 @@ public class AccountCurd {
                 .getListData(ShareKey.ACCOUNT_ALL_ACCOUNT_LIST,String.class);
         // 删除
         boolean bo1=list.remove(accountList.get(0));
+        if (list.size()==0){
+            SharedPreferencesUtil.deleteData(ShareKey.ACCOUNT_ALL_ACCOUNT_LIST);
+            return true;
+        }
         boolean bo2=SharedPreferencesUtil.putListData(ShareKey.ACCOUNT_ALL_ACCOUNT_LIST,list);
         // 全真才为真
         if (!(bo1 && bo2)){
